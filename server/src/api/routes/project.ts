@@ -1,12 +1,18 @@
 import { Router } from 'express';
-import { Todo } from '../../db/models';
+import { Project, Todo } from '../../db/models';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    const todos = await Todo.findAll();
-    res.json(todos);
+    const projects = await Project.findAll({
+      include: [
+        {
+          model: Todo,
+        },
+      ],
+    });
+    res.json(projects);
   } catch (err) {
     res.json({ message: err });
   }
@@ -14,12 +20,17 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const todo = await Todo.findOne({
+    const project = await Project.findOne({
       where: {
         id: req.params.id,
       },
+      include: [
+        {
+          model: Todo,
+        },
+      ],
     });
-    res.json(todo);
+    res.json(project);
   } catch (err) {
     res.json({ message: err });
   }
@@ -27,8 +38,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const todo = await Todo.create(req.body);
-    res.status(201).json(todo);
+    const project = await Project.create(req.body);
+    res.status(201).json(project);
   } catch (err) {
     res.json({ message: err });
   }
@@ -36,12 +47,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const todo = await Todo.update(req.body, {
+    const project = await Project.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
-    res.status(201).json(todo);
+    res.status(201).json(project);
   } catch (err) {
     res.json({ message: err });
   }
@@ -49,12 +60,12 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const todo = await Todo.destroy({
+    const project = await Project.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res.status(204).json(todo);
+    res.status(204).json(project);
   } catch (err) {
     res.json({ message: err });
   }

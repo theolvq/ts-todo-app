@@ -16,24 +16,24 @@ const seed = async () => {
   });
 
   await Todo.create({
-    projectId: project1._attributes.id,
+    projectId: project1.get('id'),
     todo: 'create database',
   });
   await Todo.create({
-    projectId: project1._attributes.id,
+    projectId: project1.get('id'),
     todo: 'create UI',
   });
   await Todo.create({
-    projectId: project1._attributes.id,
+    projectId: project1.get('id'),
     todo: 'create server',
   });
 
   await Todo.create({
-    projectId: project2._attributes.id,
+    projectId: project2.get('id'),
     todo: 'design UI',
   });
   await Todo.create({
-    projectId: project2._attributes.id,
+    projectId: project2.get('id'),
     todo: 'design UX',
   });
 };
