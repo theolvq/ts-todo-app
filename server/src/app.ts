@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 
-const app = express();
+const app: Application = express();
 
 app.use(morgan('dev'));
 app.use(express.json());

@@ -27,6 +27,7 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "no-underscore-dangle": "off"
   }
 }
