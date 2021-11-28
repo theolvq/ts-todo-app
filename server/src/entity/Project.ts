@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import Todo from './todo';
+import Todo from './Todo';
 
 @Entity()
 export default class Project {

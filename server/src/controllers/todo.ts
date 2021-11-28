@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Todo from '../entity/todo';
+import Todo from '../entity/Todo';
 
 export const getAllTodos = async (req: Request, res: Response) => {
   const todoRepository = getRepository(Todo);

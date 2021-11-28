@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
-import Project from './entity/project';
-import Todo from './entity/todo';
+import Project from './entity/Project';
+import Todo from './entity/Todo';
 
 const seed = async (connection: Connection) => {
   const firstTodo = new Todo();

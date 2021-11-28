@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Project from '../entity/project';
+import Project from '../entity/Project';
 
 export const getAllProjects = async (req: Request, res: Response) => {
   const projectRepository = getRepository(Project);
