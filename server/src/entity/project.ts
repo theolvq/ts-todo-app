@@ -10,7 +10,7 @@ export default class Project {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   deadline: Date;
 
   @OneToMany((type) => Todo, (todo) => todo.project) // eslint-disable-line no-unused-vars
