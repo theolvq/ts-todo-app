@@ -8,7 +8,7 @@
     "seed": "ts-node src/db/seed.ts",
     "start": "NODE_ENV=production ts-node src/index.ts",
     "dev": "NODE_ENV=development ts-node-dev --respawn src/index.ts",
-    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "test": "NODE_ENV=test jest --verbose",
     "start:test": "NODE_ENV=test ts-node src/index.ts"
   },
   "keywords": [],
