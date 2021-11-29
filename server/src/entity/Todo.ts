@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import Project from './Project';
+import Card from './Card';
 
 @Entity()
 export default class Todo {
@@ -14,8 +14,8 @@ export default class Todo {
   isDone: boolean;
 
   @Column({ nullable: true })
-  projectId: number;
+  cardId: number;
 
-  @ManyToOne(() => Project, (project) => project.todos)
-  project: Project;
+  @ManyToOne(() => Card, (card) => card.todos)
+  card: Card;
 }

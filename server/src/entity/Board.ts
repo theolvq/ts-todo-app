@@ -1,12 +1,6 @@
 /* eslint-disable indent */
 
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import Card from './Card';
 import BoardColumn from './BoardColumn';
 
@@ -18,7 +12,7 @@ export default class Board {
   @Column()
   name: string;
 
-  @ManyToOne(() => Card, (card) => card.board)
+  @OneToMany(() => Card, (card) => card.board)
   cards: Card[];
 
   @OneToMany(() => BoardColumn, (column) => column.board)

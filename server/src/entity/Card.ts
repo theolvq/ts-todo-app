@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import Board from './Board';
 import BoardColumn from './BoardColumn';
+import Todo from './Todo';
 
 @Entity()
 export default class Card {
@@ -21,12 +22,12 @@ export default class Card {
   @Column({ nullable: true })
   description: string;
 
-  @Column({ nullable: true })
-  list: string;
-
-  @OneToMany(() => Board, (board) => board.cards)
+  @ManyToOne(() => Board, (board) => board.cards)
   board: Board;
 
   @ManyToOne(() => BoardColumn, (column) => column.cards)
   column: BoardColumn;
+
+  @OneToMany(() => Todo, (todo) => todo.card)
+  todos: Todo[];
 }

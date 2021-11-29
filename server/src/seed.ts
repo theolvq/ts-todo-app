@@ -1,5 +1,7 @@
 import { Connection } from 'typeorm';
-import Project from './entity/Project';
+import Board from './entity/Board';
+import BoardColumn from './entity/BoardColumn';
+import Card from './entity/Card';
 import Todo from './entity/Todo';
 
 const seed = async (connection: Connection) => {
@@ -15,13 +17,6 @@ const seed = async (connection: Connection) => {
 
   await connection.manager.save(secondTodo);
 
-  const firstProject = new Project();
-  firstProject.name = 'Build Backend';
-  firstProject.deadline = new Date('2021-12-12');
-  firstProject.todos = [firstTodo, secondTodo];
-
-  await connection.manager.save(firstProject);
-
   const thirdTodo = new Todo();
   thirdTodo.todo = 'Build UI';
   thirdTodo.isDone = false;
@@ -31,14 +26,51 @@ const seed = async (connection: Connection) => {
   const fourthTodo = new Todo();
   fourthTodo.todo = 'Build connection to backend';
   fourthTodo.isDone = false;
+
   await connection.manager.save(fourthTodo);
 
-  const secondProject = new Project();
-  secondProject.name = 'Build Frontend';
-  secondProject.deadline = new Date('2021-12-12');
-  secondProject.todos = [thirdTodo, fourthTodo];
+  const board = new Board();
+  board.name = 'Todo App';
 
-  await connection.manager.save(secondProject);
+  await connection.manager.save(board);
+
+  const todoCol = new BoardColumn();
+  todoCol.name = 'Todo';
+  todoCol.board = board;
+
+  await connection.manager.save(todoCol);
+
+  const doingCol = new BoardColumn();
+  doingCol.name = 'Doing';
+  doingCol.board = board;
+  doingCol.cards = [];
+
+  await connection.manager.save(doingCol);
+
+  const doneCol = new BoardColumn();
+  doneCol.name = 'Done';
+  doneCol.board = board;
+  doneCol.cards = [];
+
+  await connection.manager.save(doneCol);
+
+  const firstCard = new Card();
+  firstCard.title = 'Todo';
+  firstCard.description = 'This is a todo list';
+  firstCard.column = todoCol;
+  firstCard.todos = [firstTodo, secondTodo, thirdTodo, fourthTodo];
+  firstCard.board = board;
+
+  await connection.manager.save(firstCard);
+
+  // delaying the save of todo column to make sure the card is saved first
+  todoCol.cards = [firstCard];
+  await connection.manager.save(todoCol);
+
+  //
+  board.cards = [firstCard];
+  board.boardColumns = [todoCol, doingCol, doneCol];
+  await connection.manager.save(board);
 };
 
 export default seed;

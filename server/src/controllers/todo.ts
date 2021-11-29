@@ -8,7 +8,7 @@ export const getAllTodos = async (req: Request, res: Response) => {
     const allTodos = await todoRepository.find();
     res.json(allTodos);
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
 
@@ -18,7 +18,7 @@ export const getTodo = async (req: Request, res: Response) => {
     const todo = await todoRepository.findOne(req.params.id);
     res.json(todo);
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
 
@@ -29,7 +29,7 @@ export const createTodo = async (req: Request, res: Response) => {
     const savedTodo = await todoRepository.save(todo);
     res.status(201).json(savedTodo);
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
 
@@ -43,7 +43,7 @@ export const updateTodo = async (req: Request, res: Response) => {
     const savedTodo = await todoRepository.save(todo);
     res.status(201).json(savedTodo);
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
 
@@ -53,6 +53,6 @@ export const deleteTodo = async (req: Request, res: Response) => {
     await todoRepository.delete(req.params.id);
     res.status(204).end();
   } catch (err) {
-    res.json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
