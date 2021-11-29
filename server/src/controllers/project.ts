@@ -28,8 +28,8 @@ export const getProject = async (req: Request, res: Response) => {
 export const createProject = async (req: Request, res: Response) => {
   const projectRepository = getRepository(Project);
 
+  const project = projectRepository.create(req.body);
   try {
-    const project = await projectRepository.create(req.body);
     const savedProject = await projectRepository.save(project);
     res.status(201).json(savedProject);
   } catch (err) {
@@ -53,13 +53,9 @@ export const updateProject = async (req: Request, res: Response) => {
 
 export const deleteProject = async (req: Request, res: Response) => {
   const projectRepository = getRepository(Project);
-
   try {
-    const project = await projectRepository.findOne(req.params.id);
-    if (!project) return;
-    projectRepository.merge(project, req.body);
-    const savedProject = await projectRepository.save(project);
-    res.status(201).json(savedProject);
+    await projectRepository.delete(req.params.id);
+    res.status(204).end();
   } catch (err) {
     res.json({ message: err });
   }

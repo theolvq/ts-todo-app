@@ -13,6 +13,6 @@ export default class Project {
   @Column({ nullable: true })
   deadline: Date;
 
-  @OneToMany((type) => Todo, (todo) => todo.project) // eslint-disable-line no-unused-vars
+  @OneToMany(() => Todo, (todo) => todo.project)
   todos: Todo[];
 }

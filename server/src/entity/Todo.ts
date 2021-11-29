@@ -16,6 +16,6 @@ export default class Todo {
   @Column({ nullable: true })
   projectId: number;
 
-  @ManyToOne((type) => Project, (project) => project.todos) // eslint-disable-line no-unused-vars
+  @ManyToOne(() => Project, (project) => project.todos)
   project: Project;
 }

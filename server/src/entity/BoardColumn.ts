@@ -18,9 +18,9 @@ export default class BoardColumn {
   @Column()
   name: string;
 
-  @ManyToOne((type) => Board, (board) => board.boardColumns) // eslint-disable-line no-unused-vars
+  @ManyToOne(() => Board, (board) => board.boardColumns)
   board: Board;
 
-  @OneToMany((type) => Card, (card) => card.column) // eslint-disable-line no-unused-vars
+  @OneToMany(() => Card, (card) => card.column)
   cards: Card[];
 }
